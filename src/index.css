@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply m-0 min-h-screen font-sans text-slate-900 antialiased dark:text-slate-100;
+  }
+
+  :focus-visible {
+    outline: 2px solid #0f766e;
+    outline-offset: 2px;
+  }
+
+  html.dark :focus-visible {
+    outline-color: #5eead4;
+  }
+}
+
+@layer components {
+  .app-shell {
+    background-color: #f1f5f9;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 0% -10%, rgba(13, 148, 136, 0.14), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(14, 165, 233, 0.10), transparent 50%),
+      linear-gradient(180deg, #f8fafc 0%, #f1f5f9 40%, #eef2f7 100%);
+  }
+
+  html.dark .app-shell {
+    background-color: #020617;
+    background-image:
+      radial-gradient(ellipse 70% 45% at 0% -10%, rgba(45, 212, 191, 0.12), transparent 55%),
+      radial-gradient(ellipse 55% 35% at 100% 0%, rgba(56, 189, 248, 0.08), transparent 50%),
+      linear-gradient(180deg, #020617 0%, #0f172a 55%, #020617 100%);
+  }
+}
