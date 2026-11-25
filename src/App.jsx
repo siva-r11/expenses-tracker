@@ -1,13 +1,10 @@
 import { AppRoutes } from './app/AppRoutes';
-import { Layout } from './components/Layout';
-import { FinanceProvider } from './context/FinanceContext';
+import { AuthProvider } from './context/AuthContext';
 
 export default function App() {
   return (
-    <FinanceProvider>
-      <Layout>
-        <AppRoutes />
-      </Layout>
-    </FinanceProvider>
+    <AuthProvider>
+      <AppRoutes />
+    </AuthProvider>
   );
 }

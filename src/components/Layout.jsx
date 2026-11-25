@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { useFinance } from '../context/FinanceContext';
 import { classifyBill } from '../lib/calculations';
 import { currentMonth, formatMonth, formatMonthShort, shiftMonth, todayISO } from '../lib/dates';
@@ -54,6 +55,7 @@ function navClass(isActive) {
 }
 
 export function Layout({ children }) {
+  const { user, error: authError, logout } = useAuth();
   const { state, theme, selectedMonth, setSelectedMonth, toggleTheme, storageError } = useFinance();
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -195,9 +197,18 @@ export function Layout({ children }) {
                 {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
                 <span className="hidden sm:inline">{theme === 'dark' ? 'Light' : 'Dark'}</span>
               </button>
+              <span className="hidden text-sm font-medium text-slate-600 dark:text-slate-300 sm:inline">{user.name}</span>
+              <button type="button" className={buttonClass('secondary', 'min-h-11')} onClick={logout}>
+                Log out
+              </button>
             </div>
           </div>
         </header>
+        {authError && (
+          <p className="bg-rose-50 px-4 py-2 text-sm text-rose-700 dark:bg-rose-950 dark:text-rose-200" role="alert">
+            {authError}
+          </p>
+        )}
         {storageError && (
           <p className="bg-rose-50 px-4 py-2 text-sm text-rose-700 dark:bg-rose-950 dark:text-rose-200" role="alert">
             {storageError}
